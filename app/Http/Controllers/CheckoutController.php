@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
 use Cixware\Esewa\Client;
@@ -44,8 +45,17 @@ class CheckoutController extends Controller
             }
         }
 
-        return view('client.checkout', ['cartItems' => $cartDetails, 'totalPrice' => $totalPrice]);
+        // Subtract the coupon discount from the total price if it exists in the session
+        $couponDiscount = Session::get('coupon_discount', 0);
+        $finalPrice = $totalPrice - $couponDiscount;
+
+        return view('client.checkout', [
+            'cartItems' => $cartDetails,
+            'totalPrice' => $finalPrice,
+            'discountPrice' => $couponDiscount, // Include the discount price
+        ]);
     }
+
 
     public function checkoutStore(Request $request)
     {
@@ -103,7 +113,18 @@ class CheckoutController extends Controller
 
         if ($status) {
             if ($request->payment_method == 'cod') {
+                Session::forget('coupon_discount');
+                Session::forget('final_price');
                 Session::forget('cart');
+                $appliedCouponCode = Session::get('applied_coupon_code');
+                // dd($appliedCouponCode);
+                // Change coupon status to inactive
+                if ($appliedCouponCode) {
+                    $coupon = Coupon::where('code', $appliedCouponCode)->first();
+                    if ($coupon) {
+                        $coupon->update(['status' => 'inactive']);
+                    }
+                }
                 return view('client.confirmation', compact('order_id'));
             } else {
                 session()->put('oid', $data['oid']);

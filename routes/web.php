@@ -65,6 +65,9 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], fun
     Route::post('checkout/store', [App\Http\Controllers\CheckoutController::class, 'checkoutStore'])->name('front.checkoutStore');
 
     Route::get('/myOrders', [App\Http\Controllers\Frontend\IndexController::class, 'myOrders'])->name('front.myOrders');
+
+    Route::post('/cart/coupon/add', [App\Http\Controllers\CartController::class, 'couponAdd'])->name('cart.coupon.add');
+
 });
 
 Route::get('/success', [App\Http\Controllers\CheckoutController::class, 'esewaPaySuccess']);

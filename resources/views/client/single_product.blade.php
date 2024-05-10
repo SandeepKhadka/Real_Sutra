@@ -166,7 +166,7 @@
                                     method="get" target="_blank">
                                     <input type="hidden" value="{{ @$product->id }}" name="product_id">
                                     <button class="btn btn--e-brand-b-2 btn-primary"
-                                        onclick="if (confirm('Do you want to start a conversation about this product?')) { submitForm(); }">Chat
+                                        onclick="submitForm(event) ">Chat
                                         Now</button>
                                 </form>
                             </div>
@@ -226,8 +226,12 @@
         }, 5000);
     </script>
      <script>
-        function submitForm() {
-            document.getElementById("my-form").submit();
+        function submitForm(event) {
+            if (confirm('Do you want to start a conversation about this product?')){
+                document.getElementById("my-form").submit();
+            }else{
+                event.preventDefault();
+            }
         }
     </script>
 @endsection

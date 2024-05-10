@@ -2,7 +2,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 
-
 <script>
     // Gloabl Chatify variables from PHP to JS
     window.chatify = {
@@ -105,7 +104,6 @@
                 },
                 error: function(xhr, status, error) {
                     // Show error message using SweetAlert
-
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',

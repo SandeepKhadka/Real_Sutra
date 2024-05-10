@@ -149,12 +149,12 @@
         </div>
         <div class="col-md-4">
             <div class="total">
-                <h5>Total Amount: Rs 2500</h5>
+                <h5>Total price: {{$totalPrice}}</h5>
 
             </div>
 
             <div class="coupon-section">
-                <input type="text" class="coupon-input" placeholder="Enter coupon code">
+                <input type="text" class="coupon-input" placeholder="Enter coupon code" required>
                 <button class="apply-coupon-btn" onclick="applyCoupon()">Apply Coupon</button>
             </div>
         </div>
@@ -260,20 +260,24 @@
 
         function applyCoupon() {
             var couponCode = document.querySelector('.coupon-input').value;
+            if(!couponCode){
+                return alert('Enter valid coupon code.');
+            }
 
-            // Assuming there's an endpoint to validate and apply coupon
+            // Send a POST request to the couponAdd route with the coupon code
             var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fetch(`/cart/apply-coupon`, {
+            fetch(`/customer/cart/coupon/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': csrfToken
                     },
                     body: JSON.stringify({
-                        coupon: couponCode
+                        code: couponCode
                     })
                 })
                 .then(response => {
+                    console.log(response)
                     if (response.ok) {
                         return response.json();
                     } else {
@@ -283,11 +287,12 @@
                 .then(data => {
                     // Assuming data contains updated total amount after applying coupon
                     document.querySelector('.total').innerHTML = `<h3>Total Amount: Rs ${data.totalAmount}</h3>`;
+                    document.querySelector('.coupon-input').value = ""
                     alert(data.message); // Show success message
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('An error occurred while applying the coupon.');
+                    alert('Failed to apply coupon.');
                 });
         }
     </script>

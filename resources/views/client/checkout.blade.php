@@ -4,102 +4,104 @@
 
 @section('style')
     <style>
-     .check-container {
-    max-width: 1000px;
-    margin: 50px auto;
-    display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
-    gap: 20px;
-}
+        .check-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow cards to wrap on smaller screens */
+            gap: 20px;
+        }
 
-.card {
-    flex-basis: calc(50% - 20px); /* Adjust card width */
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    margin-bottom: 20px; /* Add spacing between cards */
-}
+        .card {
+            flex-basis: calc(50% - 20px);
+            /* Adjust card width */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            /* Add spacing between cards */
+        }
 
-h2,
-h3 {
-    color: #333;
-    margin-bottom: 15px;
-}
+        h2,
+        h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
 
-.checkout-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+        .checkout-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-.text-area {
-    resize: vertical;
-}
+        .text-area {
+            resize: vertical;
+        }
 
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
 
-.checkbox-label {
-    margin-left: 5px;
-    font-weight: normal;
-}
+        .checkbox-label {
+            margin-left: 5px;
+            font-weight: normal;
+        }
 
-.right-card {
-    padding: 20px;
-}
+        .right-card {
+            padding: 20px;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
 
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
 
-thead {
-    background-color: #f2f2f2;
-}
+        thead {
+            background-color: #f2f2f2;
+        }
 
-tfoot {
-    background-color: #e44d26;
-    color: #fff;
-}
+        tfoot {
+            background-color: #e44d26;
+            color: #fff;
+        }
 
-tfoot td {
-    font-weight: bold;
-}
+        tfoot td {
+            font-weight: bold;
+        }
 
-.payment-options label {
-    margin-right: 15px;
-    font-weight: bold;
-}
-
+        .payment-options label {
+            margin-right: 15px;
+            font-weight: bold;
+        }
     </style>
 @endsection
 
@@ -275,8 +277,12 @@ tfoot td {
                     </tbody>
                     <tfoot>
                         <tr>
+                            <td colspan="3"><strong>Total Discount</strong></td>
+                            <td>Rs {{ $discountPrice }}</td>
+                        </tr>
+                        <tr>
                             <td colspan="3"><strong>Total</strong></td>
-                            <td>{{ $totalPrice }}</td>
+                            <td>Rs {{ $totalPrice }}</td>
                         </tr>
                     </tfoot>
                 </table>
